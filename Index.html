@@ -1,0 +1,39 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fancy Text Generator</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, textarea { width: 100%; margin: 10px 0; padding: 10px; font-size: 18px; }
+    .fancy { font-size: 22px; margin: 10px 0; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h2>Fancy Text Generator</h2>
+  <input type="text" id="input" placeholder="Type here...">
+  <div class="fancy" id="fancy1"></div>
+  <div class="fancy" id="fancy2"></div>
+  <button onclick="copyText('fancy1')">Copy Fancy 1</button>
+  <button onclick="copyText('fancy2')">Copy Fancy 2</button>
+
+  <script>
+    const input = document.getElementById('input');
+    const f1 = document.getElementById('fancy1');
+    const f2 = document.getElementById('fancy2');
+
+    input.addEventListener('input', () => {
+      const val = input.value;
+      f1.textContent = val.split('').map(c => String.fromCharCode(0x1D5A0 + c.charCodeAt(0) - 65)).join('');
+      f2.textContent = val.split('').map(c => c + '✨').join('');
+    });
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text);
+      alert('Copied: ' + text);
+    }
+  </script>
+</body>
+</html>
